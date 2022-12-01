@@ -1,6 +1,5 @@
 variable "location" {
   type    = string
-  default = "eastus"
 }
 variable "tags" {
   type = map(any)
@@ -18,9 +17,12 @@ resource "azurerm_resource_group" "rg" {
   location = var.location
   tags     = var.tags
 }
-output "rg_name" {
+output "test" {
   value = "RG name is %{if terraform.workspace == "default"}|DEFAULT|%{else}|${terraform.workspace}|%{endif} - ${azurerm_resource_group.rg.name}"
 }
 output "terraform_workspace" {
   value = terraform.workspace
+}
+output "rg" {
+  value = azurerm_resource_group.rg
 }
